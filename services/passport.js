@@ -28,23 +28,26 @@ passport.use(
         callbackURL: '/auth/google/callback',
         proxy:true
         },
-        (accessToken,refreshToken,profile,done)=>{
+        //refactor with async and await syntax 
+        //replace the original functionA.then().then() async operations
+        async (accessToken,refreshToken,profile,done)=>{
             // console.log(accessToken);
             // console.log(profile);
-            user.findOne({googleID:profile.id}).then((existingUser)=>{
+            const existingUser = await user.findOne({googleID:profile.id});
                 if(existingUser){
                     //if we find user, then this user is already there
                     done(null,existingUser)
                 }
                 else{
                     //this is a new user , create a new user
-                    new user({
+                    const user = await new user({
                         googleID: profile.id
-                    }).save().then((user)=>done(null,user));
+                    }).save();
+                    done(null,user);
                     //whenever there is ansynchronus action, we need to
                     //use then to make sure the order
                 }
-            })           
+                        
         }
     )
 );

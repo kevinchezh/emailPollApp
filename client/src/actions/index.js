@@ -31,3 +31,13 @@ export const fetchUser = () => {
         });    
     }
 };
+//syntax here means the same as above action
+export const handleToken = (token) => async dispatch =>{
+    //same code as above only change the quest into post
+    
+    const res = await axios.post('/api/stripe', token);
+    dispatch({
+        type: FETCH_USER,
+        payload:res.data
+    })
+}
