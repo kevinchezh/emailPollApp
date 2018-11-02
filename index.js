@@ -5,8 +5,9 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-//load user model
+//load user model and servey model
 require('./models/user');
+require('./models/survey');
 const keys = require('./config/keys');
 //we just want to make sure the passport.js is runed. We dont want it
 //to return anything and sign it to some variable, therefore we could
@@ -24,11 +25,15 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+//handling routes
 const authRoutes = require('./routers/authRoutes');
 //call the function in authRoutes with the variable app
 authRoutes(app);
 const billingRoutes = require('./routers/billingRoutes');
 billingRoutes(app);
+const surveyRoutes = require('./routers/surveyRoutes');
+surveyRoutes(app);
 //connect mongoose
 mongoose.connect(keys.mongoURI);
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {FETCH_USER} from './types';
+import {FETCH_USER, FETCH_SURVEYS} from './types';
 
 //redux thunk would check everything we return from an action creator
 //if return a function, then it would automatically call dispatch function
@@ -38,6 +38,23 @@ export const handleToken = (token) => async dispatch =>{
     const res = await axios.post('/api/stripe', token);
     dispatch({
         type: FETCH_USER,
+        payload:res.data
+    })
+}
+
+export const submitSurvey = (values,history) =>async dispatch => {
+    const res = await axios.post('/api/surveys',values);
+    history.push('/surveys');
+    dispatch({
+        type:FETCH_USER,
+        payload: res.data
+    })
+}
+
+export const fetchSurveys = () => async dispatch => {
+    const res = await axios.get('/api/surveys');
+    dispatch({
+        type:FETCH_SURVEYS,
         payload:res.data
     })
 }

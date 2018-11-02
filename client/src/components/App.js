@@ -9,8 +9,8 @@ import Header from './Header';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 import Landing from './Landing'
-const Dashboard = ()=> <h2>Dashboard</h2>
-const SurveyNew = ()=> <h2>SurveyNew</h2>
+import Dashboard from './Dashboard';
+import SurveyNew from './surveys/SurveyNew';
 
 class App extends Component {
     //browerser router only allow one child which means all things
@@ -28,9 +28,9 @@ class App extends Component {
     }
     render(){
         return (
-            <div className = 'container'>
+            <div>
                 <BrowserRouter>
-                    <div>
+                    <div className = 'container'>
                         <Header />
                         <Switch>
                             <Route path = '/surveys/new' component = {SurveyNew} />
