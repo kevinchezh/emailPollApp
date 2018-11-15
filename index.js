@@ -1,3 +1,9 @@
+//send grid mail settings - event notification
+//the url for local develope is : https://ffewafafsdfz.localtunnel.me/api/surveys/webhooks
+//if want to test locally, remember to chagen that on sendgrid!!
+
+
+
 //common js module, node does not support ES2015 module like import express from 'express'
 const express = require('express');
 const app = express();
